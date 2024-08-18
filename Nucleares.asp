@@ -90,11 +90,11 @@ Variables = Array( _
 )
 
 ' Function to get the value of a variable from the API
-' The response from all http://localhost:8080/?Variable=VariableName calls is a single number
+' The response from all http://localhost:8785/?Variable=VariableName calls is a single number
 Function GetVariable(Variable)
 	Dim objHTTP
 	Set objHTTP = Server.CreateObject("MSXML2.ServerXMLHTTP")
-	objHTTP.Open "GET", "http://localhost:8080/?Variable=" & Variable, False
+	objHTTP.Open "GET", "http://localhost:8785/?Variable=" & Variable, False
 	objHTTP.Send
 	GetVariable = objHTTP.responseText
 	Set objHTTP = Nothing
