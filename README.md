@@ -15,6 +15,11 @@ You many use or change it as you wish.
 
 # To use as it currently is designed
 
+1. Start the game and start the game webserver.
+2. View https://hnougher.github.io/HN-Nucleares-Dashboard/Nucleares.html on your second monitor.
+
+or
+
 1. Download the HTML file.
 2. Start the game and start the game webserver.
 3. Open the HTML directly in your web browser, place on your second monitor.
