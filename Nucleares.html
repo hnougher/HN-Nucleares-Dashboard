@@ -276,19 +276,14 @@
 	<use id="ExternalFreight" href="#TPumpFreight" x="1500" y="950" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<use id="InternalFreight" href="#TPumpFreight" x="1800" y="950" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 
-	<use id="InternalFreight" href="#TPumpFreight" x="1800" y="950" style="stroke:rgb(0,192,255); stroke-width: 1px; fill:lightgrey" />
+	<!-- <use id="InternalFreight" href="#TPumpFreight" x="1800" y="950" style="stroke:rgb(0,192,255); stroke-width: 1px; fill:lightgrey" /> -->
 </svg>
 
 <script>
-	// The API is documented at https://nuclearesgame.blogspot.com/2023/11/webserver.html
-	function updateAllValues() {
-		$.getJSON("http://localhost/Nucleares.asp", function(data) {
-			updateSVGValues(data);
-		});
-	}
+	var data = [];
 
 	// This function updates the SVG elements with the latest values from the webserver in Nucleares
-	function updateSVGValues(data) {
+	function updateSVGValues() {
 		//$(".CorePoolGradient").attr("offset", data.COOLANT_CORE_QUANTITY_IN_VESSEL + "%");
 		$("#CoreVesselGradBlue").attr("stop-color", data.CORE_TEMP >= data.CORE_TEMP_OPERATIVE ? "rgb(" + ((data.CORE_TEMP - data.CORE_TEMP_OPERATIVE) * 10) + ",0,255)" : "rgb(0,0," + (255 - (data.CORE_TEMP_OPERATIVE - data.CORE_TEMP) * 10) + ")");
 		$("#CoreVesselGradGrey").attr("stop-color", data.CORE_STEAM_PRESENT == "FALSE" ? "darkgrey" : data.CORE_HIGH_STEAM_PRESENT == "TRUE" ? "red" : "brown");
@@ -350,9 +345,117 @@
 	}
 
 	// Start a timer that runs every 1 seconds
+	var pageInitialized = false;
 	$(document).ready(function() {
-		setInterval(updateAllValues, 1000);
+		// Prevent multiple initializations because I was seeing multiple timers running
+    if (pageInitialized) return;
+    pageInitialized = true;
+
+		// Create a function that will update the data array with the latest value for a variable that is passed in
+		function createUpdateFunction(variable) {
+			return function (result) {
+				// Put the result into the data array
+				data[variable] = result;
+			}
+		}
+
+		setInterval(function(){
+			// Update the display with previously fetched data
+			updateSVGValues();
+
+			// Loop through all VARIABLES and get the latest values from the webserver
+			VARIABLES.forEach(function(variable) {
+				$.get("http://localhost:8785/?Variable=" + variable, createUpdateFunction(variable), "text");
+			});
+		}, 1000);
 	});
+
+	// All the game variables that are known about
+	// You can comment out any of these that you don't want to use
+	// Source: https://nuclearesgame.blogspot.com/2023/11/webserver.html
+	const VARIABLES = [
+		"CORE_TEMP",
+		"CORE_TEMP_OPERATIVE",
+		"CORE_TEMP_MAX",
+		"CORE_TEMP_MIN",
+		"CORE_TEMP_RESIDUAL",
+		"CORE_PRESSURE",
+		"CORE_PRESSURE_MAX",
+		"CORE_PRESSURE_OPERATIVE",
+		"CORE_INTEGRITY",
+		"CORE_WEAR",
+		"CORE_STATE",
+		"CORE_STATE_CRITICALITY",
+		"CORE_CRITICAL_MASS_REACHED",
+		"CORE_CRITICAL_MASS_REACHED_COUNTER",
+		"CORE_IMMINENT_FUSION",
+		"CORE_READY_FOR_START",
+		"CORE_STEAM_PRESENT",
+		"CORE_HIGH_STEAM_PRESENT",
+		"TIME",
+		"TIME_STAMP",
+		"COOLANT_CORE_STATE",
+		"COOLANT_CORE_PRESSURE",
+		"COOLANT_CORE_MAX_PRESSURE",
+		"COOLANT_CORE_VESSEL_TEMPERATURE",
+		"COOLANT_CORE_QUANTITY_IN_VESSEL",
+		"COOLANT_CORE_PRIMARY_LOOP_LEVEL",
+		"COOLANT_CORE_FLOW_SPEED",
+		"COOLANT_CORE_FLOW_ORDERED_SPEED",
+		"COOLANT_CORE_FLOW_REACHED_SPEED",
+		"COOLANT_CORE_QUANTITY_CIRCULATION_PUMPS_PRESENT",
+		"COOLANT_CORE_QUANTITY_FREIGHT_PUMPS_PRESENT",
+		"COOLANT_CORE_CIRCULATION_PUMP_0_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_1_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_2_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_0_DRY_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_1_DRY_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_2_DRY_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_0_OVERLOAD_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_1_OVERLOAD_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_2_OVERLOAD_STATUS",
+		"COOLANT_CORE_CIRCULATION_PUMP_0_ORDERED_SPEED",
+		"COOLANT_CORE_CIRCULATION_PUMP_1_ORDERED_SPEED",
+		"COOLANT_CORE_CIRCULATION_PUMP_2_ORDERED_SPEED",
+		"COOLANT_CORE_CIRCULATION_PUMP_0_SPEED",
+		"COOLANT_CORE_CIRCULATION_PUMP_1_SPEED",
+		"COOLANT_CORE_CIRCULATION_PUMP_2_SPEED",
+		"RODS_STATUS",
+		"RODS_MOVEMENT_SPEED",
+		"RODS_MOVEMENT_SPEED_DECREASED_HIGH_TEMPERATURE",
+		"RODS_DEFORMED",
+		"RODS_TEMPERATURE",
+		"RODS_MAX_TEMPERATURE",
+		"RODS_POS_ORDERED",
+		"RODS_POS_ACTUAL",
+		"RODS_POS_REACHED",
+		"RODS_QUANTITY",
+		"RODS_ALIGNED",
+		"GENERATOR_0_KW",
+		"GENERATOR_1_KW",
+		"GENERATOR_2_KW",
+		"GENERATOR_0_V",
+		"GENERATOR_1_V",
+		"GENERATOR_2_V",
+		"GENERATOR_0_A",
+		"GENERATOR_1_A",
+		"GENERATOR_2_A",
+		"GENERATOR_0_HERTZ",
+		"GENERATOR_1_HERTZ",
+		"GENERATOR_2_HERTZ",
+		"GENERATOR_0_BREAKER",
+		"GENERATOR_1_BREAKER",
+		"GENERATOR_2_BREAKER",
+		"STEAM_TURBINE_0_RPM",
+		"STEAM_TURBINE_1_RPM",
+		"STEAM_TURBINE_2_RPM",
+		"STEAM_TURBINE_0_TEMPERATURE",
+		"STEAM_TURBINE_1_TEMPERATURE",
+		"STEAM_TURBINE_2_TEMPERATURE",
+		"STEAM_TURBINE_0_PRESSURE",
+		"STEAM_TURBINE_1_PRESSURE",
+		"STEAM_TURBINE_2_PRESSURE"];
+
 </script>
 </body>
 </html>
