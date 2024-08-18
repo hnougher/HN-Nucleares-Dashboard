@@ -252,15 +252,21 @@
 	<use id="ElecGen1" href="#TTurbineGenerator" x="1300" y="170" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<text id="ElecGen1Text" x="1270" y="170" font-size="25" fill="white">? kW</text>
 	<use id="Turbine1" href="#TTurbineSteam" x="1200" y="170" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
-	<use id="Turbine1Fan" href="#TTurbineFan" x="1200" y="170" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey" />
+	<use id="Turbine1Fan" href="#TTurbineFan" x="1200" y="170" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey">
+		<animateTransform attributeName="transform" type="rotate" from="360 1200 170" to="0 1200 170" dur="1s" repeatCount="indefinite" />
+	</use>
 	<use id="ElecGen2" href="#TTurbineGenerator" x="1300" y="470" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<text id="ElecGen2Text" x="1270" y="470" font-size="25" fill="white">? kW</text>
 	<use id="Turbine2" href="#TTurbineSteam" x="1200" y="470" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
-	<use id="Turbine2Fan" href="#TTurbineFan" x="1200" y="470" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey" />
+	<use id="Turbine2Fan" href="#TTurbineFan" x="1200" y="470" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey">
+		<animateTransform attributeName="transform" type="rotate" from="360 1200 470" to="0 1200 470" dur="1s" repeatCount="indefinite" />
+	</use>
 	<use id="ElecGen3" href="#TTurbineGenerator" x="1300" y="770" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<text id="ElecGen3Text" x="1270" y="770" font-size="25" fill="white">? kW</text>
 	<use id="Turbine3" href="#TTurbineSteam" x="1200" y="770" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
-	<use id="Turbine3Fan" href="#TTurbineFan" x="1200" y="770" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey" />
+	<use id="Turbine3Fan" href="#TTurbineFan" x="1200" y="770" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey">
+		<animateTransform attributeName="transform" type="rotate" from="360 1200 770" to="0 1200 770" dur="1s" repeatCount="indefinite" />
+	</use>
 
 	<!-- Cooling Loop -->
 	<use id="CondenserOuter" href="#TCondenserFrame" x="1500" y="400" style="stroke: black; stroke-width: 1px; fill:none" />
@@ -332,9 +338,19 @@
 			.css("stroke", pump3stroke)
 			.css("fill", data.COOLANT_CORE_CIRCULATION_PUMP_2_DRY_STATUS == 1 ? "brown" : "url(#GradGreen" + data.COOLANT_CORE_CIRCULATION_PUMP_2_SPEED + ")");
 
+		function setFanSpeed(id, RPM) {
+			let at = $("#" + id + " > animateTransform");
+			let dur = (10 - 9*(RPM/3060)) + "s";
+			let rc = RPM == 0 ? "0" : "indefinite";
+			if (at.attr("dur") != dur) at.attr("dur", dur);
+			if (at.attr("repeatCount") != rc) at.attr("repeatCount", rc);
+		}
 		$("#Turbine1Fan").css("fill", "url(#GradGreen" + Math.floor((data.STEAM_TURBINE_0_PRESSURE-0)*1.5) + ")");
+		setFanSpeed("Turbine1Fan", data.STEAM_TURBINE_0_RPM);
 		$("#Turbine2Fan").css("fill", "url(#GradGreen" + Math.floor((data.STEAM_TURBINE_1_PRESSURE-0)*1.5) + ")");
+		setFanSpeed("Turbine2Fan", data.STEAM_TURBINE_1_RPM);
 		$("#Turbine3Fan").css("fill", "url(#GradGreen" + Math.floor((data.STEAM_TURBINE_2_PRESSURE-0)*1.5) + ")");
+		setFanSpeed("Turbine3Fan", data.STEAM_TURBINE_2_RPM);
 		
 		$("#ElecGen1").css("fill", data.GENERATOR_0_KW == 0 ? "grey" : data.GENERATOR_0_BREAKER == "FALSE" ? "green" : "brown");
 		$("#ElecGen2").css("fill", data.GENERATOR_1_KW == 0 ? "grey" : data.GENERATOR_1_BREAKER == "FALSE" ? "green" : "brown");
