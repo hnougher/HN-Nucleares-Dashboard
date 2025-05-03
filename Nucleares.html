@@ -119,6 +119,30 @@
 		<linearGradient id="GradGreen98" x1="0" x2="0" y1="1" y2="0"><stop stop-color="green" offset="98%"/><stop stop-color="lightgrey" offset="98%"/></linearGradient>
 		<linearGradient id="GradGreen99" x1="0" x2="0" y1="1" y2="0"><stop stop-color="green" offset="99%"/><stop stop-color="lightgrey" offset="99%"/></linearGradient>
 		<linearGradient id="GradGreen100" x1="0" x2="0" y1="1" y2="0"><stop stop-color="green" offset="100%"/><stop stop-color="lightgrey" offset="100%"/></linearGradient>
+		<linearGradient id="CorePoolGradient" x1="0" x2="0" y1="1" y2="0">
+			<stop stop-color="blue" offset="0%" class="CorePoolGradient" />
+			<stop stop-color="lightgrey" offset="0%" class="CorePoolGradient" />
+		</linearGradient>
+		<linearGradient id="CoreVesselGradient" x1="0" x2="0" y1="1" y2="0">
+			<stop id="CoreVesselGradBlue" stop-color="blue" offset="0%" class="CoreVesselGradient" />
+			<stop id="CoreVesselGradGrey" stop-color="darkgrey" offset="0%" class="CoreVesselGradient" />
+		</linearGradient>
+		<linearGradient id="SteamGenGradient0" x1="0" x2="0" y1="1" y2="0">
+			<stop id="SteamGen0Blue" stop-color="blue" offset="0%" />
+			<stop id="SteamGen0Steam" stop-color="lightgrey" offset="0%" />
+		</linearGradient>
+		<linearGradient id="SteamGenGradient1" x1="0" x2="0" y1="1" y2="0">
+			<stop id="SteamGen1Blue" stop-color="blue" offset="0%" />
+			<stop id="SteamGen1Steam" stop-color="lightgrey" offset="0%" />
+		</linearGradient>
+		<linearGradient id="SteamGenGradient2" x1="0" x2="0" y1="1" y2="0">
+			<stop id="SteamGen2Blue" stop-color="blue" offset="0%" />
+			<stop id="SteamGen2Steam" stop-color="lightgrey" offset="0%" />
+		</linearGradient>
+		<linearGradient id="CondenserGradient" x1="0" x2="0" y1="1" y2="0">
+			<stop stop-color="blue" offset="0%" />
+			<stop stop-color="lightgrey" offset="0%" />
+		</linearGradient>
 	</defs>
 
 	<!-- Shape definitions -->
@@ -207,16 +231,6 @@
 
 	<!-- Core -->
 	<g id="Core" transform="translate(300 500)">
-		<defs>
-			<linearGradient id="CorePoolGradient" x1="0" x2="0" y1="1" y2="0">
-				<stop stop-color="blue" offset="0%" class="CorePoolGradient" />
-				<stop stop-color="lightgrey" offset="0%" class="CorePoolGradient" />
-			</linearGradient>
-			<linearGradient id="CoreVesselGradient" x1="0" x2="0" y1="1" y2="0">
-				<stop id="CoreVesselGradBlue" stop-color="blue" offset="0%" class="CoreVesselGradient" />
-				<stop id="CoreVesselGradGrey" stop-color="darkgrey" offset="0%" class="CoreVesselGradient" />
-			</linearGradient>
-		</defs>
 		<use id="CorePool" href="#TCorePool" x="0" y="0" style="stroke: black; stroke-width: 1px; fill: url(#CorePoolGradient);" />
 		<use id="CoreVessel" href="#TCoreVessel" x="0" y="20" style="stroke: black; stroke-width: 2px; fill:url(#CoreVesselGradient)" />
 		<use id="CoreVesselInteg" href="#TCoreVessel" x="0" y="20" style="stroke: red; stroke-width: 1px; stroke-dasharray: 0 10; fill:none" />
@@ -230,11 +244,11 @@
 	<use id="PrimaryPump3" href="#TPumpCirculation" x="600" y="870" style="stroke:black; stroke-width: 2px; fill:lightgrey" />
 
 	<!-- 3 Steam generators  -->
-	<use id="SteamGen1Out" href="#TSteamGenerator" x="800" y="200" style="stroke: blue; stroke-width: 1px; fill:none" />
+	<use id="SteamGen1Out" href="#TSteamGenerator" x="800" y="200" style="stroke: black; stroke-width: 1px; fill: url(#SteamGenGradient0);" />
 	<use id="SteamGen1In"  href="#TSteamGenInner"  x="810" y="220" style="stroke: red; stroke-width: 1px; fill:none" />
-	<use id="SteamGen2Out" href="#TSteamGenerator" x="800" y="500" style="stroke: blue; stroke-width: 1px; fill:none" />
+	<use id="SteamGen2Out" href="#TSteamGenerator" x="800" y="500" style="stroke: black; stroke-width: 1px; fill: url(#SteamGenGradient1);" />
 	<use id="SteamGen2In"  href="#TSteamGenInner"  x="810" y="520" style="stroke: red; stroke-width: 1px; fill:none" />
-	<use id="SteamGen3Out" href="#TSteamGenerator" x="800" y="800" style="stroke: blue; stroke-width: 1px; fill:none" />
+	<use id="SteamGen3Out" href="#TSteamGenerator" x="800" y="800" style="stroke: black; stroke-width: 1px; fill: url(#SteamGenGradient2);" />
 	<use id="SteamGen3In"  href="#TSteamGenInner"  x="810" y="820" style="stroke: red; stroke-width: 1px; fill:none" />
 
 	<!-- Secondary Loops -->
@@ -251,18 +265,21 @@
 	<!-- Turbines -->
 	<use id="ElecGen1" href="#TTurbineGenerator" x="1300" y="170" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<text id="ElecGen1Text" x="1270" y="170" font-size="25" fill="white">? kW</text>
+	<text id="ElecGen1Text2" x="1270" y="200" font-size="25" fill="white">? kPA</text>
 	<use id="Turbine1" href="#TTurbineSteam" x="1200" y="170" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<use id="Turbine1Fan" href="#TTurbineFan" x="1200" y="170" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey">
 		<animateTransform attributeName="transform" type="rotate" from="360 1200 170" to="0 1200 170" dur="1s" repeatCount="indefinite" />
 	</use>
 	<use id="ElecGen2" href="#TTurbineGenerator" x="1300" y="470" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<text id="ElecGen2Text" x="1270" y="470" font-size="25" fill="white">? kW</text>
+	<text id="ElecGen2Text2" x="1270" y="500" font-size="25" fill="white">? kPA</text>
 	<use id="Turbine2" href="#TTurbineSteam" x="1200" y="470" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<use id="Turbine2Fan" href="#TTurbineFan" x="1200" y="470" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey">
 		<animateTransform attributeName="transform" type="rotate" from="360 1200 470" to="0 1200 470" dur="1s" repeatCount="indefinite" />
 	</use>
 	<use id="ElecGen3" href="#TTurbineGenerator" x="1300" y="770" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<text id="ElecGen3Text" x="1270" y="770" font-size="25" fill="white">? kW</text>
+	<text id="ElecGen3Text2" x="1270" y="800" font-size="25" fill="white">? kPA</text>
 	<use id="Turbine3" href="#TTurbineSteam" x="1200" y="770" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<use id="Turbine3Fan" href="#TTurbineFan" x="1200" y="770" style="stroke:darkgrey; stroke-width: 1px; fill:lightgrey">
 		<animateTransform attributeName="transform" type="rotate" from="360 1200 770" to="0 1200 770" dur="1s" repeatCount="indefinite" />
@@ -276,9 +293,9 @@
 	<use id="CoolingTower" href="#TCoolingTower" x="1920" y="300" style="stroke: black; stroke-width: 1px; fill:none" />
 	<text x="1850" y="500" font-size="25" fill="black">Infinite Water</text>
 
-	<!-- River -->
+	<!-- Lake Water -->
 	<path d="M 2000,750 T 1980,770 1920,800 1800,900 1600,1000 L 2000,1000" style="fill:blue" />
-	<text x="1870" y="950" font-size="25" fill="white">River Water</text>
+	<text x="1870" y="950" font-size="25" fill="white">Lake Water</text>
 	<use id="ExternalFreight" href="#TPumpFreight" x="1500" y="950" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 	<use id="InternalFreight" href="#TPumpFreight" x="1800" y="950" style="stroke:black; stroke-width: 1px; fill:lightgrey" />
 
@@ -287,57 +304,130 @@
 
 <script>
 	var data = [];
+	var VARIABLES = {};
+	var SUBSCRIPTIONS = [];
+
+	// Subscription to GET variables for continuous update
+	function subscribeToVar(variable) {
+		if (!VARIABLES.GET.includes(variable) || SUBSCRIPTIONS.includes(variable)) return;
+		SUBSCRIPTIONS.push(variable);
+	}
+
+	// Subscribe variables used in other functions of this page
+	function initSubscribers() {
+		subscribeToVar("COOLANT_CORE_QUANTITY_IN_VESSEL");
+		subscribeToVar("COOLANT_CORE_PRIMARY_LOOP_LEVEL");
+		subscribeToVar("CORE_TEMP");
+		subscribeToVar("CORE_TEMP_OPERATIVE");
+		subscribeToVar("CORE_STEAM_PRESENT");
+		subscribeToVar("CORE_HIGH_STEAM_PRESENT");
+		subscribeToVar("CORE_WEAR");
+		subscribeToVar("CORE_INTEGRITY");
+		subscribeToVar("RODS_POS_ACTUAL");
+		subscribeToVar("CORE_CRITICAL_MASS_REACHED");
+		subscribeToVar("CORE_STATE_CRITICALITY");
+		subscribeToVar("FREIGHT_PUMP_CONDENSER_ACTIVE");
+		subscribeToVar("FREIGHT_PUMP_EXTERNAL_ACTIVE");
+		subscribeToVar("FREIGHT_PUMP_INTERNAL_ACTIVE");
+
+		for (var i = 0; i < 3; i++) {
+			subscribeToVar(`COOLANT_CORE_CIRCULATION_PUMP_${i}_STATUS`);
+			subscribeToVar(`COOLANT_CORE_CIRCULATION_PUMP_${i}_SPEED`);
+			subscribeToVar(`COOLANT_CORE_CIRCULATION_PUMP_${i}_DRY_STATUS`);
+			subscribeToVar(`STEAM_TURBINE_${i}_RPM`);
+			subscribeToVar(`STEAM_TURBINE_${i}_PRESSURE`);
+		}
+
+		for (var i = 0; i < 3; i++) {
+			subscribeToVar(`GENERATOR_${i}_KW`);
+			subscribeToVar(`GENERATOR_${i}_BREAKER`);
+		}
+
+		for (var i = 0; i < 3; i++) {
+			subscribeToVar(`COOLANT_SEC_CIRCULATION_PUMP_${i}_STATUS`);
+			subscribeToVar(`COOLANT_SEC_CIRCULATION_PUMP_${i}_SPEED`);
+			subscribeToVar(`COOLANT_SEC_CIRCULATION_PUMP_${i}_DRY_STATUS`);
+			subscribeToVar(`STEAM_TURBINE_${i}_BYPASS_ACTUAL`);
+			subscribeToVar(`MSCV_${i}_OPENING_ACTUAL`);
+			subscribeToVar(`COOLANT_SEC_${i}_VOLUME`);
+		}
+
+		subscribeToVar("CONDENSER_CIRCULATION_PUMP_SPEED");
+		subscribeToVar("CONDENSER_CIRCULATION_PUMP_STATUS");
+		subscribeToVar("CONDENSER_CIRCULATION_PUMP_DRY_STATUS");
+		subscribeToVar("CONDENSER_VOLUME");
+	}
 
 	// This function updates the SVG elements with the latest values from the webserver in Nucleares
 	function updateSVGValues() {
-		//$(".CorePoolGradient").attr("offset", data.COOLANT_CORE_QUANTITY_IN_VESSEL + "%");
+		// Pre-core
+		$("#InternalFreight").css("fill", data.FREIGHT_PUMP_INTERNAL_ACTIVE == 1 ? "green" : "grey");
+		$("#ExternalFreight").css("fill", data.FREIGHT_PUMP_EXTERNAL_ACTIVE == 1 ? "green" : "grey");
+
+		// Core
+		$(".CorePoolGradient").attr("offset", data.COOLANT_CORE_QUANTITY_IN_VESSEL + "%");
 		$("#CoreVesselGradBlue").attr("stop-color", data.CORE_TEMP >= data.CORE_TEMP_OPERATIVE ? "rgb(" + ((data.CORE_TEMP - data.CORE_TEMP_OPERATIVE) * 10) + ",0,255)" : "rgb(0,0," + (255 - (data.CORE_TEMP_OPERATIVE - data.CORE_TEMP) * 10) + ")");
 		$("#CoreVesselGradGrey").attr("stop-color", data.CORE_STEAM_PRESENT == "FALSE" ? "darkgrey" : data.CORE_HIGH_STEAM_PRESENT == "TRUE" ? "red" : "brown");
 
 		$(".CoreVesselGradient").attr("offset", data.COOLANT_CORE_PRIMARY_LOOP_LEVEL + "%");
 		$("#CoreVessel").css("stroke-dasharray", (10 - data.CORE_WEAR / 10) + " " + (data.CORE_WEAR / 10));
 		$("#CoreVesselInteg").css("stroke-dasharray", (10 - data.CORE_INTEGRITY / 10) + " " + (data.CORE_INTEGRITY / 10));
-		$("#ControlRods").attr("y", -140 + (data.RODS_POS_ACTUAL * 1.2));
+		$("#ControlRods").attr("y", -140 + (data.RODS_POS_ACTUAL * 1.6));
 
 		$("#CoreFuel").css("fill", data.CORE_CRITICAL_MASS_REACHED == "FALSE" ? "black" : data.CORE_STATE_CRITICALITY >= 0 ? ("rgb(255," + (data.CORE_STATE_CRITICALITY * 500) + ",0)") : ("rgb(" + (255 - data.CORE_STATE_CRITICALITY * 500) + ",0,0)"));
 
-		var pump1stroke = "white";
-		var pump2stroke = "white";
-		var pump3stroke = "white";
-		switch (data.COOLANT_CORE_CIRCULATION_PUMP_0_STATUS) {
-			case "0": pump1stroke = "black"; break;
-			case "1": pump1stroke = "purple"; break;
-			case "2": pump1stroke = "green"; break;
-			case "3": pump1stroke = "red"; break;
-			case "4": pump1stroke = "lightgrey"; break;
-			case "5": pump1stroke = "brown"; break;
+		// Primary Loop
+		for (var i = 0; i < 3; i++) {
+			let pumpStroke = "white";
+			switch (data[`COOLANT_CORE_CIRCULATION_PUMP_${i}_STATUS`]) {
+				case "0": pumpStroke = "black"; break;
+				case "1": pumpStroke = "purple"; break;
+				case "2": pumpStroke = "green"; break;
+				case "3": pumpStroke = "red"; break;
+				case "4": pumpStroke = "lightgrey"; break;
+				case "5": pumpStroke = "brown"; break;
+			}
+			$(`#PrimaryPump${i + 1}`)
+				.css("stroke", pumpStroke)
+				.css("fill", data[`COOLANT_CORE_CIRCULATION_PUMP_${i}_DRY_STATUS`] == 1 ? "brown" : `url(#GradGreen${data[`COOLANT_CORE_CIRCULATION_PUMP_${i}_SPEED`]})`);
 		}
-		switch (data.COOLANT_CORE_CIRCULATION_PUMP_1_STATUS) {
-			case "0": pump2stroke = "black"; break;
-			case "1": pump2stroke = "purple"; break;
-			case "2": pump2stroke = "green"; break;
-			case "3": pump2stroke = "red"; break;
-			case "4": pump2stroke = "lightgrey"; break;
-			case "5": pump2stroke = "brown"; break;
-		}
-		switch (data.COOLANT_CORE_CIRCULATION_PUMP_2_STATUS) {
-			case "0": pump3stroke = "black"; break;
-			case "1": pump3stroke = "purple"; break;
-			case "2": pump3stroke = "green"; break;
-			case "3": pump3stroke = "red"; break;
-			case "4": pump3stroke = "lightgrey"; break;
-			case "5": pump3stroke = "brown"; break;
-		}
-		$("#PrimaryPump1")
-			.css("stroke", pump1stroke)
-			.css("fill", data.COOLANT_CORE_CIRCULATION_PUMP_0_DRY_STATUS == 1 ? "brown" : "url(#GradGreen" + data.COOLANT_CORE_CIRCULATION_PUMP_0_SPEED + ")");
-		$("#PrimaryPump2")
-			.css("stroke", pump2stroke)
-			.css("fill", data.COOLANT_CORE_CIRCULATION_PUMP_1_DRY_STATUS == 1 ? "brown" : "url(#GradGreen" + data.COOLANT_CORE_CIRCULATION_PUMP_1_SPEED + ")");
-		$("#PrimaryPump3")
-			.css("stroke", pump3stroke)
-			.css("fill", data.COOLANT_CORE_CIRCULATION_PUMP_2_DRY_STATUS == 1 ? "brown" : "url(#GradGreen" + data.COOLANT_CORE_CIRCULATION_PUMP_2_SPEED + ")");
 
+		// Secondary Loop
+		for (var i = 0; i < 3; i++) {
+			let pumpStroke = "white";
+			switch (data[`COOLANT_SEC_CIRCULATION_PUMP_${i}_STATUS`]) {
+				case "0": pumpStroke = "black"; break;
+				case "1": pumpStroke = "purple"; break;
+				case "2": pumpStroke = "green"; break;
+				case "3": pumpStroke = "red"; break;
+				case "4": pumpStroke = "lightgrey"; break;
+				case "5": pumpStroke = "brown"; break;
+			}
+			$(`#L2Pump${i + 1}`)
+				.css("stroke", pumpStroke)
+				.css("fill", data[`COOLANT_SEC_CIRCULATION_PUMP_${i}_DRY_STATUS`] == 1 ? "brown" : `url(#GradGreen${data[`COOLANT_SEC_CIRCULATION_PUMP_${i}_SPEED`]})`);
+
+			$(`#L2ValveBypass${i + 1}`)
+				.css("fill", `url(#GradGreen${data[`STEAM_TURBINE_${i}_BYPASS_ACTUAL`]})`);
+			$(`#L2ValveActive${i + 1}`)
+				.css("fill", `url(#GradGreen${data[`MSCV_${i}_OPENING_ACTUAL`]})`);
+
+			let volume = data[`COOLANT_SEC_${i}_VOLUME`] || 0;
+			let fillOffset = 0;
+			if (volume > 0 && volume <= 30000) {
+				fillOffset = volume / 30000 * 75;
+			} else if (volume > 30000) {
+				fillOffset = 75 + ((volume - 30000) / 30000) * 25;
+			}
+
+			$(`#SteamGen${i + 1}Out`)
+				.css("fill", `url(#SteamGenGradient${i})`);
+
+			$(`#SteamGenGradient${i} stop:first-child`).attr("offset", `${fillOffset}%`);
+			$(`#SteamGenGradient${i} stop:last-child`).attr("offset", `${fillOffset}%`);
+		}
+
+		// Electric Generators
 		function setFanSpeed(id, RPM) {
 			let at = $("#" + id + " > animateTransform");
 			let dur = (10 - 9*(RPM/3060)) + "s";
@@ -358,120 +448,83 @@
 		$("#ElecGen1Text").text((Math.round(data.GENERATOR_0_KW / 100)/10) + " kW");
 		$("#ElecGen2Text").text((Math.round(data.GENERATOR_1_KW / 100)/10) + " kW");
 		$("#ElecGen3Text").text((Math.round(data.GENERATOR_2_KW / 100)/10) + " kW");
+		$("#ElecGen1Text2").text((Math.round(data.STEAM_TURBINE_0_PRESSURE * 10)/10) + " kPa");
+		$("#ElecGen2Text2").text((Math.round(data.STEAM_TURBINE_1_PRESSURE * 10)/10) + " kPa");
+		$("#ElecGen3Text2").text((Math.round(data.STEAM_TURBINE_2_PRESSURE * 10)/10) + " kPa");
+
+		// Tertiary Loop
+		$("#CondenserRefil").css("fill", data.FREIGHT_PUMP_CONDENSER_ACTIVE == 1 ? "green" : "grey");
+
+		let condenserPumpStroke = "white";
+		switch (data.CONDENSER_CIRCULATION_PUMP_STATUS) {
+			case "0": condenserPumpStroke = "black"; break;
+			case "1": condenserPumpStroke = "purple"; break;
+			case "2": condenserPumpStroke = "green"; break;
+			case "3": condenserPumpStroke = "red"; break;
+			case "4": condenserPumpStroke = "lightgrey"; break;
+			case "5": condenserPumpStroke = "brown"; break;
+		}
+		$("#CoolingPump")
+			.css("stroke", condenserPumpStroke)
+			.css("fill", data.CONDENSER_CIRCULATION_PUMP_DRY_STATUS == 1 ? "brown" : `url(#GradGreen${data.CONDENSER_CIRCULATION_PUMP_SPEED})`);
+
+		let condenserVolume = data.CONDENSER_VOLUME || 0;
+		let condenserFillOffset = Math.min(condenserVolume / 360000, 1) * 100;
+
+		$("#CondenserOuter")
+			.css("fill", `url(#CondenserGradient)`);
+
+		$("#CondenserGradient stop:first-child").attr("offset", `${condenserFillOffset}%`);
+		$("#CondenserGradient stop:last-child").attr("offset", `${condenserFillOffset}%`);
 	}
 
-	// Start a timer that runs every 1 seconds
+
+	
+	// Initialize the data collection loop
+	function createUpdateFunction(variable) {
+		return function (result) { data[variable] = result;	}
+	}
+	function collectData() {
+		updateSVGValues();
+		// Loop through all SUBSCRIPTIONS and get the latest values from the webserver
+		SUBSCRIPTIONS.forEach(function(variable) {
+			$.ajax({
+				mimeType:	'text/plain; charset=x-user-undefined',
+				url:		'http://localhost:8785/?Variable=' + variable,
+				type:		'GET',
+				dataType:	'text',
+				success:	createUpdateFunction(variable)
+				});
+		});
+	}
+
+	// Load the variables list
+	// Use http://localhost:8785/?variable=WEBSERVER_LIST_VARIABLES
+	function setUpVariables(result) {
+		result.split("\n").forEach((line) => {
+			let [type,vars] = line.split(':');
+			VARIABLES[type] = vars.split(',');
+		});
+		console.log("Received VARIABLES", VARIABLES);
+		initSubscribers();
+		setInterval(collectData, 1000);
+	}
+
+	// Start the whole page
 	var pageInitialized = false;
 	$(document).ready(function() {
 		// Prevent multiple initializations because I was seeing multiple timers running
-    if (pageInitialized) return;
-    pageInitialized = true;
+		if (pageInitialized) return;
+		pageInitialized = true;
 
-		// Create a function that will update the data array with the latest value for a variable that is passed in
-		function createUpdateFunction(variable) {
-			return function (result) {
-				// Put the result into the data array
-				data[variable] = result;
-			}
-		}
-
-		setInterval(function(){
-			// Update the display with previously fetched data
-			updateSVGValues();
-
-			// Loop through all VARIABLES and get the latest values from the webserver
-			VARIABLES.forEach(function(variable) {
-				$.get("http://localhost:8785/?Variable=" + variable, createUpdateFunction(variable), "text");
+		$.ajax({
+			mimeType:	'text/plain; charset=x-user-undefined',
+			url:		'http://localhost:8785/?Variable=WEBSERVER_LIST_VARIABLES',
+			type:		'GET',
+			dataType:	'text',
+			success:	setUpVariables
 			});
-		}, 1000);
 	});
-
-	// All the game variables that are known about
-	// You can comment out any of these that you don't want to use
-	// Source: https://nuclearesgame.blogspot.com/2023/11/webserver.html
-	const VARIABLES = [
-		"CORE_TEMP",
-		"CORE_TEMP_OPERATIVE",
-		"CORE_TEMP_MAX",
-		"CORE_TEMP_MIN",
-		"CORE_TEMP_RESIDUAL",
-		"CORE_PRESSURE",
-		"CORE_PRESSURE_MAX",
-		"CORE_PRESSURE_OPERATIVE",
-		"CORE_INTEGRITY",
-		"CORE_WEAR",
-		"CORE_STATE",
-		"CORE_STATE_CRITICALITY",
-		"CORE_CRITICAL_MASS_REACHED",
-		"CORE_CRITICAL_MASS_REACHED_COUNTER",
-		"CORE_IMMINENT_FUSION",
-		"CORE_READY_FOR_START",
-		"CORE_STEAM_PRESENT",
-		"CORE_HIGH_STEAM_PRESENT",
-		"TIME",
-		"TIME_STAMP",
-		"COOLANT_CORE_STATE",
-		"COOLANT_CORE_PRESSURE",
-		"COOLANT_CORE_MAX_PRESSURE",
-		"COOLANT_CORE_VESSEL_TEMPERATURE",
-		"COOLANT_CORE_QUANTITY_IN_VESSEL",
-		"COOLANT_CORE_PRIMARY_LOOP_LEVEL",
-		"COOLANT_CORE_FLOW_SPEED",
-		"COOLANT_CORE_FLOW_ORDERED_SPEED",
-		"COOLANT_CORE_FLOW_REACHED_SPEED",
-		"COOLANT_CORE_QUANTITY_CIRCULATION_PUMPS_PRESENT",
-		"COOLANT_CORE_QUANTITY_FREIGHT_PUMPS_PRESENT",
-		"COOLANT_CORE_CIRCULATION_PUMP_0_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_1_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_2_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_0_DRY_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_1_DRY_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_2_DRY_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_0_OVERLOAD_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_1_OVERLOAD_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_2_OVERLOAD_STATUS",
-		"COOLANT_CORE_CIRCULATION_PUMP_0_ORDERED_SPEED",
-		"COOLANT_CORE_CIRCULATION_PUMP_1_ORDERED_SPEED",
-		"COOLANT_CORE_CIRCULATION_PUMP_2_ORDERED_SPEED",
-		"COOLANT_CORE_CIRCULATION_PUMP_0_SPEED",
-		"COOLANT_CORE_CIRCULATION_PUMP_1_SPEED",
-		"COOLANT_CORE_CIRCULATION_PUMP_2_SPEED",
-		"RODS_STATUS",
-		"RODS_MOVEMENT_SPEED",
-		"RODS_MOVEMENT_SPEED_DECREASED_HIGH_TEMPERATURE",
-		"RODS_DEFORMED",
-		"RODS_TEMPERATURE",
-		"RODS_MAX_TEMPERATURE",
-		"RODS_POS_ORDERED",
-		"RODS_POS_ACTUAL",
-		"RODS_POS_REACHED",
-		"RODS_QUANTITY",
-		"RODS_ALIGNED",
-		"GENERATOR_0_KW",
-		"GENERATOR_1_KW",
-		"GENERATOR_2_KW",
-		"GENERATOR_0_V",
-		"GENERATOR_1_V",
-		"GENERATOR_2_V",
-		"GENERATOR_0_A",
-		"GENERATOR_1_A",
-		"GENERATOR_2_A",
-		"GENERATOR_0_HERTZ",
-		"GENERATOR_1_HERTZ",
-		"GENERATOR_2_HERTZ",
-		"GENERATOR_0_BREAKER",
-		"GENERATOR_1_BREAKER",
-		"GENERATOR_2_BREAKER",
-		"STEAM_TURBINE_0_RPM",
-		"STEAM_TURBINE_1_RPM",
-		"STEAM_TURBINE_2_RPM",
-		"STEAM_TURBINE_0_TEMPERATURE",
-		"STEAM_TURBINE_1_TEMPERATURE",
-		"STEAM_TURBINE_2_TEMPERATURE",
-		"STEAM_TURBINE_0_PRESSURE",
-		"STEAM_TURBINE_1_PRESSURE",
-		"STEAM_TURBINE_2_PRESSURE"];
-
 </script>
 </body>
 </html>
